@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  datasync:
+    image: ${DOCKER_REGISTRY-}datasync
+    build:
+      context: .
+      dockerfile: datasync/Dockerfile
+    networks:
+      - rabbitmq_net
+
+networks:
+  rabbitmq_net:
+    driver: bridge
+    external: true
