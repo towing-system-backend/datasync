@@ -7,11 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 Env.Load();
 
 builder.Services.AddSingleton<UserProjector>();
-
+builder.Services.AddSingleton<SupplierCompanyProjector>();
 builder.Services.AddScoped<IProjector, UserProjector>();
-
+builder.Services.AddScoped<IProjector, SupplierCompanyProjector>();
 builder.Services.AddControllers();
-
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "Datasync API", Version = "v1" });

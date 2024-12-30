@@ -10,7 +10,10 @@ namespace DataSync.Infrastructure
 
         public Task Consume(ConsumeContext<EventType> context)
         {
-            _projectors.ToList().ForEach(async projector => await projector.Project(context.Message));
+            foreach (var projector in _projectors)
+            {
+                projector.Project(context.Message);
+            }
 
             return Task.CompletedTask;
         }

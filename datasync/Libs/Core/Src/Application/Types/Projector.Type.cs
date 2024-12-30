@@ -4,6 +4,6 @@ namespace Datasync.Core
 {
     public interface IProjector
     {
-        Task Project(EventType @event);
+        public void Project(EventType @event);
     }
 }
