@@ -1,3 +1,5 @@
+using datasync.Libs.Core.Src.Infrastructure.Projectors.OrderProjector;
+using datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector;
 using Datasync.Core;
 using DataSync.Infrastructure;
 using DotNetEnv;
@@ -8,8 +10,12 @@ Env.Load();
 
 builder.Services.AddSingleton<UserProjector>();
 builder.Services.AddSingleton<SupplierCompanyProjector>();
+builder.Services.AddSingleton<OrderProjector>();
+builder.Services.AddSingleton<TowDriverProjector>();
 builder.Services.AddScoped<IProjector, UserProjector>();
 builder.Services.AddScoped<IProjector, SupplierCompanyProjector>();
+builder.Services.AddScoped<IProjector, OrderProjector>();
+builder.Services.AddScoped<IProjector, TowDriverProjector>();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
