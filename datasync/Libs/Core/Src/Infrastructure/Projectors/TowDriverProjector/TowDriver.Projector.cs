@@ -52,7 +52,6 @@ namespace Datasync.Core
                 context.GetProperty<string>("TowDriverLocation"),
                 context.GetProperty<string>("TowDriverStatus")
             );
-
             await _towDriverCollection.InsertOneAsync(towDriver);
         }
 
@@ -91,7 +90,7 @@ namespace Datasync.Core
 
             var filter = Builders<MongoTowDriver>.Filter.Eq(towDriver => towDriver.TowDriverId, @event.PublisherId);
             var update = Builders<MongoTowDriver>.Update
-                .Set(towDriver => towDriver.DrivingLiceseOwnerName, drivingLicenseOwnerName)
+                .Set(towDriver => towDriver.DrivingLicenseOwnerName, drivingLicenseOwnerName)
                 .Set(towDriver => towDriver.DrivingLicenseIssueDate, drivingLicenseIssueDate)
                 .Set(towDriver => towDriver.DrivingLicenseExpirationDate, drivingLicenseExpirationDate);
 

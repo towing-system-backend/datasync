@@ -47,13 +47,16 @@ namespace Datasync.Core
                 context.GetProperty<string>("Status"),
                 context.GetProperty<string>("IssueLocation"),
                 context.GetProperty<string>("Destination"),
+                context.GetProperty<string>("Issuer"),
                 context.GetProperty<string>("TowDriverAssigned"),
                 context.GetProperty<string>("Details"),
                 context.GetProperty<string>("Name"),
                 context.GetProperty<string>("Image"),
                 context.GetProperty<string>("PolicyId"),
                 context.GetProperty<string>("PhoneNumber"),
+                context.GetProperty<int>("IdentificationNumber"),
                 context.GetProperty<decimal>("TotalCost"),
+                context.GetProperty<double>("TotalDistance"),
                 new List<MongoAdditionalCost>()
             );
 
@@ -95,6 +98,32 @@ namespace Datasync.Core
                 @event.PublisherId,
                 order => order.Destination,
                 destination
+            );
+        }
+
+        private async Task OnOrderTotalCostUpdated(DomainEvent @event)
+        {
+            var context = @event.Context;
+            var totalCost = context.GetProperty<decimal>("TotalCost");
+
+            await MongoHelper.Update(
+                _orderCollection,
+                @event.PublisherId,
+                order => order.TotalCost,
+                totalCost
+            );
+        }
+
+        private async Task OnOrderTotalDistanceUpdated(DomainEvent @event)
+        {
+            var context = @event.Context;
+            var totalDistance = context.GetProperty<double>("TotalDistance");
+
+            await MongoHelper.Update(
+                _orderCollection,
+                @event.PublisherId,
+                order => order.TotalDistance,
+                totalDistance
             );
         }
 

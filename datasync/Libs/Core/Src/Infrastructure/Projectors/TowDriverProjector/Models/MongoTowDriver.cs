@@ -7,7 +7,7 @@ namespace Datasync.Core
             string towDriverId,
             string name,
             string email,
-            string drivingLiceseOwnerName,
+            string drivingLicenseOwnerName,
             DateOnly drivingLicenseIssueDate,
             DateOnly drivingLicenseExpirationDate,
             string medicalCertificateOwnerName,
@@ -23,7 +23,7 @@ namespace Datasync.Core
         public string TowDriverId = towDriverId;
         public string Name = name;
         public string Email = email;
-        public string DrivingLiceseOwnerName = drivingLiceseOwnerName;
+        public string DrivingLicenseOwnerName = drivingLicenseOwnerName;
         public DateOnly DrivingLicenseIssueDate = drivingLicenseIssueDate;
         public DateOnly DrivingLicenseExpirationDate = drivingLicenseExpirationDate;
         public string MedicalCertificateOwnerName = medicalCertificateOwnerName;
