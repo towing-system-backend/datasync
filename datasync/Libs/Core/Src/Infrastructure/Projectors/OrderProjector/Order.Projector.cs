@@ -159,6 +159,5 @@ namespace datasync.Libs.Core.Src.Infrastructure.Projectors.OrderProjector
             await _orderCollection.UpdateOneAsync(filter, update);
         }
 
-       
     }
 }

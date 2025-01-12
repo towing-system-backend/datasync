@@ -1,4 +1,4 @@
-﻿using datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector.Models;
+using datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector.Models;
 using datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector.Types;
 using Datasync.Core;
 using MassTransit.Transports;
