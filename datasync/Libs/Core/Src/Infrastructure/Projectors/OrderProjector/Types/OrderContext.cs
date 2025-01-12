@@ -1,4 +1,4 @@
-﻿namespace datasync.Libs.Core.Src.Infrastructure.Projectors.OrderProjector.Types
+﻿namespace Datasync.Core
 {
     public record OrderContext(
         string Status,

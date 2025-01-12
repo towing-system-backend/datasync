@@ -1,13 +1,9 @@
-﻿using datasync.Libs.Core.Src.Infrastructure.Projectors.OrderProjector.Models;
-using datasync.Libs.Core.Src.Infrastructure.Projectors.OrderProjector.Types;
-using Datasync.Core;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using RabbitMQ.Contracts;
-using System;
 using System.Reflection;
 using System.Text.Json;
 
-namespace datasync.Libs.Core.Src.Infrastructure.Projectors.OrderProjector
+namespace Datasync.Core
 {
     public class OrderProjector : IProjector
     {

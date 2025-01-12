@@ -1,16 +1,10 @@
-﻿using datasync.Libs.Core.Src.Infrastructure.Projectors.OrderProjector.Models;
-using datasync.Libs.Core.Src.Infrastructure.Projectors.OrderProjector.Types;
-using datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector.Models;
-using datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector.Types;
-using Datasync.Core;
-using MassTransit.Transports;
+﻿using MassTransit.Transports;
 using MongoDB.Driver;
 using RabbitMQ.Contracts;
-using System;
 using System.Reflection;
 using System.Text.Json;
 
-namespace datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector
+namespace Datasync.Core
 {
     public class TowDriverProjector : IProjector
     {
@@ -27,14 +21,11 @@ namespace datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector
             var method = GetType().GetMethod($"On{@event.Type}", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             if (method == null) return;
 
-            Type typeOfContext = null;
-            if (@event.Type.Contains("TowDriver", StringComparison.OrdinalIgnoreCase)) typeOfContext = typeof(TowDriverContext);
-
-            var context = JsonSerializer.Deserialize(@event.Context, typeOfContext!);
+            var context = JsonSerializer.Deserialize<TowDriverContext>(@event.Context)!;
             var newEvent = new DomainEvent(
                 @event.PublisherId,
                 @event.Type,
-                context!,
+                context,
                 @event.OcurredDate
             );
             method.Invoke(this, new object[] { newEvent });
@@ -54,7 +45,7 @@ namespace datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector
                 context.GetProperty<DateOnly>("LicenseIssueDate"),
                 context.GetProperty<DateOnly>("LicenseExpirationDate"),
                 context.GetProperty<string>("MedicalCertificateOwnerName"),
-                context.GetProperty<int>("MedicalCertificateAge"),
+                context.GetProperty<int>("MedicalCertificateOwnerAge"),
                 context.GetProperty<DateOnly>("MedicalCertificateIssueDate"),
                 context.GetProperty<DateOnly>("MedicalCertificateExpirationDate"),
                 context.GetProperty<int>("TowDriverIdentificationNumber"),
@@ -110,6 +101,7 @@ namespace datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector
         private async Task OnTowDriverMedicalCertificateUpdated(DomainEvent @event)
         {
             var context = @event.Context;
+
             var medicalCertificateOwnerName = context.GetProperty<string>("MedicalCertificateOwnerName");
             var medicalCertificateOwnerAge = context.GetProperty<int>("MedicalCertificateOwnerAge");
             var medicalCertificateIssueDate = context.GetProperty<DateOnly>("MedicalCertificateIssueDate");
@@ -122,7 +114,7 @@ namespace datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector
                 .Set(towDriver => towDriver.MedicalCertificateIssueDate, medicalCertificateIssueDate)
                 .Set(towDriver => towDriver.MedicalCertificateExpirationDate, medicalCertificateExpirationDate);
 
-            await _towDriverCollection.UpdateOneAsync(filter, update, new UpdateOptions { IsUpsert = true });
+            await _towDriverCollection.UpdateOneAsync(filter, update, new UpdateOptions { IsUpsert = true });            
         }
 
         private async Task OnTowDriverIdentificationNumberUpdated(DomainEvent @event)

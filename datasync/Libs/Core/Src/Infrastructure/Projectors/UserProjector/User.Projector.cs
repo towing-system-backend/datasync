@@ -3,7 +3,6 @@ using RabbitMQ.Contracts;
 using System.Reflection;
 using System.Text.Json;
 
-
 namespace Datasync.Core
 {
     public class UserProjector : IProjector

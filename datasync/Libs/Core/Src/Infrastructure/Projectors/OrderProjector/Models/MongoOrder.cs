@@ -1,7 +1,6 @@
-﻿using Datasync.Core;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace datasync.Libs.Core.Src.Infrastructure.Projectors.OrderProjector.Models
+namespace Datasync.Core
 {
     public class MongoOrder(
         string orderId,
@@ -49,7 +48,6 @@ namespace datasync.Libs.Core.Src.Infrastructure.Projectors.OrderProjector.Models
         public string? Name = name;
         public string? Category = category;
         public decimal? Amount = amount;
-
         string IEntity._id => Id;
     }
 }

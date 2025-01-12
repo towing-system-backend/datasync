@@ -1,6 +1,4 @@
-﻿using Datasync.Core;
-
-namespace datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector.Types
+﻿namespace Datasync.Core
 {
     public record TowDriverContext
     (

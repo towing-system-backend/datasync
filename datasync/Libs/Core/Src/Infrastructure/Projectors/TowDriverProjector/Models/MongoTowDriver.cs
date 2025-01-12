@@ -1,7 +1,6 @@
-﻿using Datasync.Core;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace datasync.Libs.Core.Src.Infrastructure.Projectors.TowDriverProjector.Models
+namespace Datasync.Core
 {
     public class MongoTowDriver
     (
