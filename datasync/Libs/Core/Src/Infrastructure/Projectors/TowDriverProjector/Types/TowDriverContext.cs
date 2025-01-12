@@ -3,6 +3,7 @@
     public record TowDriverContext
     (
         string TowDriverId,
+        string SupplierCompanyId,
         string TowDriverName,
         string TowDriverEmail,
         string LicenseOwnerName,
@@ -14,6 +15,7 @@
         DateOnly MedicalCertificateExpirationDate,
         int TowDriverIdentificationNumber,
         string TowDriverLocation,
-        string TowDriverStatus
+        string TowDriverStatus,
+        string TowDriverTowAssigned
     );
 }

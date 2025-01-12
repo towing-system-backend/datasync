@@ -4,13 +4,16 @@
         string Status,
         string IssueLocation,
         string Destination,
+        string Issuer,
         string? TowDriverAssigned,
         string Details,
         string Name,
         string Image,
         string PolicyId,
         string PhoneNumber,
+        int IdentificationNumber,
         decimal TotalCost,
+        double TotalDistance,
         List<AdditionalCostContext>? AdditionalCosts 
     );
 

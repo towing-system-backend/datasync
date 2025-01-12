@@ -7,13 +7,16 @@ namespace Datasync.Core
         string status,
         string issueLocation,
         string destination,
+        string issuer,
         string? TowDriverAssigned,
         string details,
         string name,
         string image,
         string policyId,
         string phoneNumber,
+        int IdentificationNumber,
         decimal totalCost,
+        double totalDistance,
         List<MongoAdditionalCost>? additionalCosts
     ) :
         IEntity
@@ -30,6 +33,7 @@ namespace Datasync.Core
         public string PolicyId = policyId;
         public string PhoneNumber = phoneNumber;
         public decimal TotalCost = totalCost;
+        public double TotalDistance = totalDistance;
         public List<MongoAdditionalCost>? AdditionalCosts = additionalCosts;
 
         string IEntity._id => OrderId;

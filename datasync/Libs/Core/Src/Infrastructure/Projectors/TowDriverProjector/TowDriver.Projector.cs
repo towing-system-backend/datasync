@@ -39,6 +39,7 @@ namespace Datasync.Core
             var towDriver = new MongoTowDriver
             (
                 @event.PublisherId,
+                context.GetProperty<string>("SupplierCompanyId"),
                 context.GetProperty<string>("TowDriverName"),
                 context.GetProperty<string>("TowDriverEmail"),
                 context.GetProperty<string>("LicenseOwnerName"),
@@ -50,9 +51,9 @@ namespace Datasync.Core
                 context.GetProperty<DateOnly>("MedicalCertificateExpirationDate"),
                 context.GetProperty<int>("TowDriverIdentificationNumber"),
                 context.GetProperty<string>("TowDriverLocation"),
-                context.GetProperty<string>("TowDriverStatus")
+                context.GetProperty<string>("TowDriverStatus"),
+                context.GetProperty<string>("TowDriverTowAssigned")
             );
-
             await _towDriverCollection.InsertOneAsync(towDriver);
         }
 
@@ -91,7 +92,7 @@ namespace Datasync.Core
 
             var filter = Builders<MongoTowDriver>.Filter.Eq(towDriver => towDriver.TowDriverId, @event.PublisherId);
             var update = Builders<MongoTowDriver>.Update
-                .Set(towDriver => towDriver.DrivingLiceseOwnerName, drivingLicenseOwnerName)
+                .Set(towDriver => towDriver.DrivingLicenseOwnerName, drivingLicenseOwnerName)
                 .Set(towDriver => towDriver.DrivingLicenseIssueDate, drivingLicenseIssueDate)
                 .Set(towDriver => towDriver.DrivingLicenseExpirationDate, drivingLicenseExpirationDate);
 
@@ -152,6 +153,32 @@ namespace Datasync.Core
                 @event.PublisherId,
                 towDriver => towDriver.Status,
                 TowDriverStatus
+            );
+        }
+
+        private async Task OnTowDriverTowAssignedUpdated(DomainEvent @event) 
+        {
+            var context = @event.Context;
+            var TowAssigned = context.GetProperty<string>("TowDriverTowAssigned");
+
+            await MongoHelper.Update(
+                _towDriverCollection,
+                @event.PublisherId,
+                towDriver => towDriver.TowAssigned,
+                TowAssigned
+            );
+        }
+
+        private async Task OnSupplierCompanyIdUpdated(DomainEvent @event)
+        {
+            var context = @event.Context;
+            var id = context.GetProperty<string>("SupplierCompanyId");
+
+            await MongoHelper.Update(
+                _towDriverCollection,
+                @event.PublisherId,
+                towDriver => towDriver.SupplierCompanyId,
+                id
             );
         }
     }

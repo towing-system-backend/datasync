@@ -3,11 +3,12 @@
 namespace Datasync.Core
 {
     public class MongoTowDriver
-    (
+        (
             string towDriverId,
+            string supplierCompanyId,
             string name,
             string email,
-            string drivingLiceseOwnerName,
+            string drivingLicenseOwnerName,
             DateOnly drivingLicenseIssueDate,
             DateOnly drivingLicenseExpirationDate,
             string medicalCertificateOwnerName,
@@ -16,14 +17,16 @@ namespace Datasync.Core
             DateOnly medicalCertificateExpirationDate,
             int identificationNumber,
             string? location,
-            string? status
-    ) : IEntity
+            string? status,
+            string? towAssigned
+        ) : IEntity
     {
         [BsonId]
         public string TowDriverId = towDriverId;
+        public string SupplierCompanyId = supplierCompanyId;
         public string Name = name;
         public string Email = email;
-        public string DrivingLiceseOwnerName = drivingLiceseOwnerName;
+        public string DrivingLicenseOwnerName = drivingLicenseOwnerName;
         public DateOnly DrivingLicenseIssueDate = drivingLicenseIssueDate;
         public DateOnly DrivingLicenseExpirationDate = drivingLicenseExpirationDate;
         public string MedicalCertificateOwnerName = medicalCertificateOwnerName;
@@ -33,6 +36,7 @@ namespace Datasync.Core
         public int IdentificationNumber = identificationNumber;
         public string? Location = location;
         public string? Status = status;
+        public string? TowAssigned = towAssigned;
 
         string IEntity._id => TowDriverId;
     }

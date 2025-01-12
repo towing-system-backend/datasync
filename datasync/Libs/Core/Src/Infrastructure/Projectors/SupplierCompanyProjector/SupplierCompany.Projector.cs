@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using RabbitMQ.Contracts;
 using System.Reflection;
+using System.Text.Json;
 
 namespace Datasync.Core
 {
@@ -18,7 +19,20 @@ namespace Datasync.Core
             var method = GetType().GetMethod($"On{@event.Type}", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             if (method == null) return;
 
-            var context = Deserializer.Deserialize(@event.Context);
+            Type typeOfContext = null;
+            if (@event.Type.Contains("SupplierCompany", StringComparison.OrdinalIgnoreCase)) 
+                typeOfContext = typeof(SupplierCompanyContext);
+            if (@event.Type.Contains("Department", StringComparison.OrdinalIgnoreCase)) 
+                typeOfContext = typeof(Department);
+            if (@event.Type.Contains("Policy", StringComparison.OrdinalIgnoreCase))
+                typeOfContext = typeof(Policy);
+            if (@event.Type.Contains("TowDriver", StringComparison.OrdinalIgnoreCase))
+                typeOfContext = typeof(TowDriver);
+
+            if (typeOfContext == null) return;
+
+            var context = JsonSerializer.Deserialize(@event.Context, typeOfContext!);
+
             var newEvent = new DomainEvent(
                 @event.PublisherId,
                 @event.Type,
