@@ -14,7 +14,7 @@ namespace Datasync.Core
         string image,
         string policyId,
         string phoneNumber,
-        int IdentificationNumber,
+        int identificationNumber,
         decimal totalCost,
         double totalDistance,
         List<MongoAdditionalCost>? additionalCosts
@@ -35,6 +35,7 @@ namespace Datasync.Core
         public string PhoneNumber = phoneNumber;
         public decimal TotalCost = totalCost;
         public double TotalDistance = totalDistance;
+        public int IdentificationNumber = identificationNumber;
         public List<MongoAdditionalCost>? AdditionalCosts = additionalCosts;
 
         string IEntity._id => OrderId;
