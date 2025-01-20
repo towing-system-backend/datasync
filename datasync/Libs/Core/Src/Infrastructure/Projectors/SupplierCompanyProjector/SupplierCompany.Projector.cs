@@ -113,8 +113,8 @@ namespace Datasync.Core
             var coverageAmount = context.GetProperty<int>("CoverageAmount");
             var price = context.GetProperty<decimal>("Price");
             var type = context.GetProperty<string>("Type");
-            var issuanceDate = context.GetProperty<DateTime>("IssuanceDate");
-            var expirationDate = context.GetProperty<DateTime>("ExpirationDate");
+            var issuanceDate = context.GetProperty<DateOnly>("IssuanceDate");
+            var expirationDate = context.GetProperty<DateOnly>("ExpirationDate");
 
             var mongoPolicy = new MongoPolicy(
                 policyId,
