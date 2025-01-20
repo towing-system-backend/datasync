@@ -10,6 +10,7 @@ namespace Datasync.Extensions
         public static void ConfigureProjectors(this IServiceCollection services)
         {
             services.AddScoped<IProjector, UserProjector>();
+            services.AddScoped<IProjector, TowProjector>();
             services.AddScoped<IProjector, SupplierCompanyProjector>();
             services.AddScoped<IProjector, OrderProjector>();
             services.AddScoped<IProjector, TowDriverProjector>();
