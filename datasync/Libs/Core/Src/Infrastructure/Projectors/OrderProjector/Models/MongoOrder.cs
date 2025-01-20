@@ -8,7 +8,7 @@ namespace Datasync.Core
         string issueLocation,
         string destination,
         string issuer,
-        string? TowDriverAssigned,
+        string? towDriverAssigned,
         string details,
         string name,
         string image,
@@ -26,7 +26,8 @@ namespace Datasync.Core
         public string Status = status;
         public string IssueLocation = issueLocation;
         public string Destination = destination;
-        public string? TowDriverAssigned = TowDriverAssigned;
+        public string Issuer = issuer;
+        public string? TowDriverAssigned = towDriverAssigned;
         public string Details = details;
         public string Name = name;
         public string Image = image;
