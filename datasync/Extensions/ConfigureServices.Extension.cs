@@ -18,6 +18,7 @@ namespace Datasync.Extensions
             services.AddSingleton<SupplierCompanyProjector>();
             services.AddSingleton<OrderProjector>();
             services.AddSingleton<TowDriverProjector>();
+            services.AddSingleton<TowProjector>();
         }
 
         public static void ConfigureSwagger(this IServiceCollection services)

@@ -60,6 +60,7 @@ namespace Datasync.Core
                     policy.PolicyId,
                     policy.Title,
                     policy.CoverageAmount,
+                    policy.CoverageDistance,
                     policy.Price, policy.Type,
                     policy.IssuanceDate,
                     policy.ExpirationDate
@@ -111,6 +112,7 @@ namespace Datasync.Core
             var policyId = context.GetProperty<string>("PolicyId");
             var title = context.GetProperty<string>("Title");
             var coverageAmount = context.GetProperty<int>("CoverageAmount");
+            var coverageDistance = context.GetProperty<int>("CoverageDistance");
             var price = context.GetProperty<decimal>("Price");
             var type = context.GetProperty<string>("Type");
             var issuanceDate = context.GetProperty<DateOnly>("IssuanceDate");
@@ -120,6 +122,7 @@ namespace Datasync.Core
                 policyId,
                 title,
                 coverageAmount,
+                coverageDistance,
                 price,
                 type,
                 issuanceDate,
@@ -179,6 +182,7 @@ namespace Datasync.Core
                     policy.PolicyId,
                     policy.Title,
                     policy.CoverageAmount,
+                    policy.CoverageDistance,
                     policy.Price,
                     policy.Type,
                     policy.IssuanceDate,

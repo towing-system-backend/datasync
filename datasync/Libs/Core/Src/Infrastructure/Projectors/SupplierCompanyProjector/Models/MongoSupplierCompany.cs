@@ -10,12 +10,13 @@ namespace Datasync.Core
         public List<string> Employees = employees;
     }
 
-    public class MongoPolicy(string policyId, string title, int coverageAmount, decimal price, string type, DateOnly issuanceDate, DateOnly expirationDate)
+    public class MongoPolicy(string policyId, string title, int coverageAmount, int coverageDistance, decimal price, string type, DateOnly issuanceDate, DateOnly expirationDate)
     {
         [BsonId]
         public string PolicyId = policyId;
         public string Title = title;
         public int CoverageAmount = coverageAmount;
+        public int CoverageDistance = coverageDistance;
         public decimal Price = price;
         public string Type = type;
         public DateOnly IssuanceDate = issuanceDate;

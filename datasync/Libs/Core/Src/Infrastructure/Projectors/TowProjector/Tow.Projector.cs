@@ -12,14 +12,13 @@ namespace Datasync.Core
         {
             MongoClient client = new MongoClient(Environment.GetEnvironmentVariable("CONNECTION_URI"));
             IMongoDatabase database = client.GetDatabase(Environment.GetEnvironmentVariable("DATABASE_NAME"));
-            _towCollection = database.GetCollection<MongoTow>("tow-drivers");
+            _towCollection = database.GetCollection<MongoTow>("tows");
         }
 
         public void Project(EventType @event)
         {
             var method = GetType().GetMethod($"On{@event.Type}", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             if (method == null) return;
-
             var context = JsonSerializer.Deserialize<TowContext>(@event.Context)!;
             var newEvent = new DomainEvent(
                 @event.PublisherId,
