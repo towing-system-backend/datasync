@@ -57,7 +57,7 @@ namespace Datasync.Core
             ).ToList();
 
             var mongoPolicies = policies.Select(policy => new MongoPolicy(
-                    policy.PolicyId,
+                    policy.Id,
                     policy.Title,
                     policy.CoverageAmount,
                     policy.CoverageDistance,
@@ -109,7 +109,7 @@ namespace Datasync.Core
         {
             var context = @event.Context;
             var supplierCompanyId = @event.PublisherId;
-            var policyId = context.GetProperty<string>("PolicyId");
+            var policyId = context.GetProperty<string>("Id");
             var title = context.GetProperty<string>("Title");
             var coverageAmount = context.GetProperty<int>("CoverageAmount");
             var coverageDistance = context.GetProperty<int>("CoverageDistance");
@@ -179,7 +179,7 @@ namespace Datasync.Core
             var policies = context.GetProperty<List<Policy>>("Policies");
 
             var mongoPolicies = policies.Select(policy => new MongoPolicy(
-                    policy.PolicyId,
+                    policy.Id,
                     policy.Title,
                     policy.CoverageAmount,
                     policy.CoverageDistance,
